@@ -55,108 +55,144 @@ content <- read_html(url)
 content
 ```
 
-1. Знайдемо потрібні елементи на сторінці
+1. Знайдемо потрібні елементи на сторінці (клік правою кнопкою миші на елементі => "Перевірити"(або "Inspect")б щось подібне), ctrl+shift+c на сторінці.
 ![find element](1_find-element.png)
 
+Спробуємо вибрати рядки з таблиці
 ```{r}
-header <- content %>%
-  html_node('div.disinfo-db-columns') %>%
-  html_children() %>%
+content %>%
+  html_nodes("div.disinfo-db-post") %>%
+  html_text()
+
+# <div class="disinfo-db-post> "
+```
+Поки не дуже гарно, весь зміст рядка "злипся", інформація не структурована так, як ми хочемо.  
+
+Виберемо лише заголовки та дати, використаємо для цього CSS-селектори за допомогою атрибутів.
+```{r}
+titles <- content %>%
+  html_nodes('div.disinfo-db-post [data-column="Title"]') %>%
   html_text() %>%
   str_trim()
 
-header
-
-rows <- content %>%
-  html_nodes('div.disinfo-db-post')
-
-rows %>%
-  html_nodes('div.disinfo-db-cell[data-column]') %>%
+dates <- content %>%
+  html_nodes('div.disinfo-db-post [data-column="Date"]') %>%
   html_text() %>%
   str_trim()
+
+dates
 ```
-### Які проблеми у нас з'явились?
-1. Результати представлені в сторінках. Отже треба заходити на кожну сторінку окремо і парсити її. Сторінки однакові
-Ми *не*хочемо робити це вручну кілька сот разів!
+Селектор `'div.disinfo-db-post [data-column="Title"]'` означає: вибрати всі елементи, у яких атрибут `data-column` дорівнює `Title`, і які знаходяться всередині елемента `div` з класом `disinfo-db-post`, це визначено через пробіл у селекторі. Ми тут трохи ускладнили з практичного, зробивши ієрархічний селектор.
 
-Рішення — *цикл*
-Приклад циклу:
+Супер, маємо дані! Пора зробити з них таблицю — `data.frame` — і зберегти її. 
 ```{r}
-iterable <- c(1:15)
-iterable
+df <- data.frame(titles = titles, date = dates)
+# синтаксис: data.frame(назва_колонки = назва_вектора_значень, ще_одна_колонка=…)
 
-result <- c()
-
-for (item in iterable) {   # назва "item" довільна
-  result <- c(result, item ^ 3)
-}
-
-result
+write.csv(df, "eu_disinfo_1st_page.csv", row.names = FALSE)    # записали дані в форматі .csv
+# Файл з даними буде у тій же папці, де збережено ноутбук
 ```
-### Цикл для сторінок
-Дуже часто номер сторінки просто пишуть в url. У нашому випадку там записаний офсет — скільки рядків відступити. На сторінці видно, що найбільший офсет складає 7300, а на 1 сторінці 10 записів.  
-Тобто нам треба пройти циклом по офсетам: 0, 10, 20, 30, …, 7290, 7300.
+
+Спробуйте відкрити файл у текстовому редакторі (Блокнот тощо, хороший на віндоус Notepad++, для маків та лінуксів Sublime Text, чи в самому RStudio).
+CSV — рядки відділені новими лініями, значення комірок розділені комами:
+```
+"","titles","date"
+"1","The COVID-19 outbreak is a pretext to gain control of the world’s population","25.03.2020"
+"2","Swedish oligarchs impede the introduction of quarantine measures","24.03.2020"
+```
+(вище просто текстовий чанк, він не виконається як код, але виділиться візуально)
+
+Як прочитати csv
 ```{r}
-offsets <- seq(0, 500, by=10)    # Послідовність з кроком 10
+read.csv("eu_disinfo_1st_page.csv")
+```
 
-date <- c()    # Тут будемо зберігати оброблені дані
-title <- c()
-outlets <- c()
-country <- c()
-link <- c()
 
-pb <- progress_bar$new(total = length(offsets))    # щоб бачити, як просувається скрейпінг
+## Зациклюємо. Скачаємо те саме для кожної сторінки
+Адреса сайту  виглядає так: https://euvsdisinfo.eu/disinformation-cases/?offset=20  
+`offset=20` це друга сторінка, у третьої оффсет буде 30, у одинадцятої 110 і так далі.
+Отже щоб завантажити дані з однієї сторінки потрібно:
+1. Завантажити її html, підставляючи по ходу цикла різні офсети
+2. Вибрати потрібні нам дані з відповідних елементів (як ми вибрали дати та заголовки з першої сторінки)
+3. Зберегти дані
 
-for (o in offsets) {
-  url <- sprintf("https://euvsdisinfo.eu/disinformation-cases/?offset=%s", o)    # Вставляємо офсет в url
-  rows <- read_html(url) %>%
-    html_nodes('div.disinfo-db-post')    # Копі-паст коду для першої сторінки
+```{r}
+pb <- progress_bar$new(
+  format = "  downloading [:bar] :percent in :elapsed ",
+  total = 50, clear = FALSE, width= 60)
+# скопіювала з довідки про progress_bar, змінено лише параметр total
+
+# Вектори, у яких будемо зберігати значення
+dates <- c()
+titles <- c()
+links <- c()
+
+url_template <- "https://euvsdisinfo.eu/disinformation-cases/?offset="
+```
+
+Візьмемо перші 50 сторінок, всередині цикла те саме, що ми робили з першою сторінкою
+```{r}
+for (page in 1:50) {
+  # з'єднуємо рядки: основу url-адреси, №сторінки помножений на 10, бо сторінки йдуть з кроком 10
+  url <- str_c(url_template,
+               page * 10)
   
-  # візьмемо всі клітинки, щоб не повторювати цей код 4 рази
-  cells <- rows %>%
-    html_nodes("div.disinfo-db-cell[data-column]") %>%
+  content <- read_html(url)
+  
+  # Копіпаст коду для першої сторінки
+  titles <- content %>%
+    html_nodes('div.disinfo-db-post [data-column="Title"]') %>%
     html_text() %>%
-    str_trim()    # це видаляє зайві пробіли на початку і в кінці рядка
+    str_trim() %>%
+    c(titles, .)    # "." крапка означає змінну в пайпі, якщо пона не на першому місці 
   
-  # додамо результати: дати до дат, назви до назв і т.д.
-  # seq(1, 40, 4) дасть вектор c(1, 5, 9, 13 …). Поставивши його в квадратні дужки, отримаємо перше, п'яте, дев'яте і т.д. значення у векторі.
-  date    <- c(date,    cells[seq(1, length(cells), 4)])
-  title   <- c(title,   cells[seq(2, length(cells), 4)])
-  outlets <- c(outlets, cells[seq(3, length(cells), 4)])
-  country <- c(country, cells[seq(4, length(cells), 4)])
+  dates <- content %>%
+    html_nodes('div.disinfo-db-post [data-column="Date"]') %>%
+    html_text() %>%
+    str_trim()  %>%
+    c(dates, .)
   
-  # лінки окремо, адже там інший css-селектор
-  links_in_loop <- rows %>%
-    html_nodes(".cell-title a") %>%
-    html_attr("href")
+  # ще додамо лінки. Тут вибираємо не текст, а атрибут "href" тега "<a>" — лінк
+  links <- content %>%
+    html_nodes('div.disinfo-db-post [data-column="Title"] a') %>%
+    html_attr("href") %>%
+    c(links, .)
   
-  link <- c(link, links_in_loop)
+  # Ще один важливий крок: затримка між запитами, щоб не зробити DDoS-атаку на сайт
+  Sys.sleep(2)    # 2 секунди програма буде "спати" 
   
+  # Оновимо прогрес-бар. Це для комфорту, щоб бачити, скільки ще лишилось сторінок
   pb$tick()
-  
-  Sys.sleep(2)    # відсилати запит кожні 2 секунди, а не безперервно. Щоб не нашкодити сайту
 }
 ```
 
-### Таблиця з результатами
+Перевіримо, вектори мають мати довжиноу 500 при офсеті 50. Далі робимо з них датафрейм і зберігаємо його
 ```{r}
-df <- data.frame(date = date,
-                 title = title,
-                 outlets = outlets,
-                 country = country,
-                 link = link)
+stopifnot(length(dates) == 500 &
+          length(titles) == 500 &
+          length(links) == 500)
+# Якщо довжина кожного з векторів не 500, нам виб'є помилку. Ми просимо R через `stopifnot` вважати помилкою, якщо в результаті скрейпінгу у нас не збігається кільність елементів у колонках.
 
+# датафрейм через пайп одразу йде на зберігання
+data.frame(title = titles,
+           date = dates,
+           link = links) %>%
+  write.csv("eudisinfo_all_pages.csv",
+            row.names = FALSE) # щоб не зберігати непотрібну колонку номерів рядків
+```
+
+Прочитаємо датафрейм, який щойно зберегли:
+```{r}
+df <- read.csv("eudisinfo_all_pages.csv")
 df
 ```
+Відскрейпили.
 
-
-## Збереження даних
-```{r}
-write.csv(df, 'eu_vs_disinfo.csv')
-```
+## Невелика візуалізація
 
 ```{r}
 library(lubridate)
+
 df <- df %>%
   mutate(covid19 = str_detect(title, "[Cc]ovid.?19|[Cc]oronavirus"),
          date = dmy(df$date))
