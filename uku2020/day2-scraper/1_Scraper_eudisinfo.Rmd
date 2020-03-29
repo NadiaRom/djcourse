@@ -196,10 +196,13 @@ df
 # install.packages("lubridate")
 library(lubridate)
 
+search_str <- "covid.?19|coronavirus|sars.?cov.?2|pandemic|epidemic"
+
 df <- df %>%
-  mutate(covid19 = str_detect(str_to_lower(title),
-                              "covid.?19|coronavirus|sars.?cov.?2"),
+  mutate(covid19 = str_detect(str_to_lower(title), search_str),
          date = dmy(df$date))
+
+df
 ```
 - `mutate` — створити в дата-фреймі нову колонку з певними значеннями  
 - `dmy` — функція з бібліотеки `lubridate` щоб перетворбвати рядки з датами на формат даних дату  
