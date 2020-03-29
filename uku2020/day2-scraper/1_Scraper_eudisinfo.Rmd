@@ -190,9 +190,7 @@ df
 ```
 Відскрейпили.
 
-## Невелика візуалізація
-
-### основні операції з даними
+## Основні операції з даними
 
 ```{r}
 # install.packages("lubridate")
@@ -200,7 +198,7 @@ library(lubridate)
 
 df <- df %>%
   mutate(covid19 = str_detect(str_to_lower(title),
-                              "covid.?19|coronavirus|sars-cov.?2"),
+                              "covid.?19|coronavirus|sars.?cov.?2"),
          date = dmy(df$date))
 ```
 - `mutate` — створити в дата-фреймі нову колонку з певними значеннями  
