@@ -117,7 +117,7 @@ read.csv("eu_disinfo_1st_page.csv")
 3. Зберегти дані
 
 ```{r}
-npages <- 200    # скільки сторінок скрейпити
+npages <- 30    # скільки сторінок скрейпити
 
 pb <- progress_bar$new(
   format = "  downloading [:bar] :percent in :elapsed ",
@@ -185,7 +185,7 @@ data.frame(title = titles,
 
 Прочитаємо датафрейм, який щойно зберегли:
 ```{r}
-df <- read.csv("eudisinfo_200_pages.csv")
+df <- read.csv("https://github.com/NadiaRom/djcourse/raw/master/uku2020/day2-scraper/eudisinfo_200_pages.csv")
 df
 ```
 Відскрейпили.
