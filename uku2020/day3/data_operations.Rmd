@@ -1,0 +1,187 @@
+---
+title: "How Covid19 affeacted air trafic?"
+output: html_notebook
+---
+
+Проведемо аналіз даних у пакеті *dplyr*. Ми подивимось, як пандемія коронавірусу сповільнювала рух світу на прикладі авіації.
+
+Як завжди, на початку завантажимо бібліотеки
+```{r}
+library(lubridate)
+library(tidyverse)
+library(rvest)
+```
+
+## Завантаження
+Потім завантажимо і самі дані:  
+1. Статистику фіксованих захворювань, смертей та одужань від коронавірусу  
+2. Авіаційну статистику  
+R може прочитати дані як з файлу, так і за посиланням на csv. Якщо дані оновлять, нам навіть не знадобиться щось міняти в ноутбуці
+```{r}
+cases <- read.csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv")
+
+deaths <- read.csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_deaths_global.csv&filename=time_series_covid19_deaths_global.csv")
+
+recovered <- read.csv("https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_recovered_global.csv&filename=time_series_covid19_recovered_global.csv")
+```
+
+## Підготовка
+Подивимось на наші дані і зрозуміємо, як їх треба почистити, якщо треба.
+```{r}
+cases
+```
+
+## Довгий => широкий. Стовпчики в рядки
+
+Згадаємо про "довгий" і "широкий" формати даних. У даних коронавірусу маємо "довгий формат", бо чомусь дати, це ж змінні, утворрють назви колонок. Ми хочемо мати формат, яколи рядки означають спостереження, а колонки — змінні. Наприклад, колонки "країна", "дата", "кількість випадків", а у рядках відповідні спостереження.
+
+```{r}
+cases <- cases %>%
+  
+  pivot_longer(cols = -c(Country.Region, Province.State, Lat, Long),
+               #які колонки залишимо
+               names_to = "date",
+               # як назвати колонку зі старими назвами "широких" колонок
+               names_prefix = "X",
+               # чи є якийсь зайвий символ перед назвами колонок
+               values_to = "cases"
+               # як назвати колонку зі значеннями у старих "широких" колонках
+               ) %>%    # "косметичні операції"
+  mutate(date = mdy(date)) %>%
+  # перетворимо дату-рядок на дату
+  select(-c(Lat, Long)) %>%
+  # приберемо зайві колонки
+  rename(region = Province.State, country = Country.Region)
+  # перейменуємо колонки
+
+cases
+```
+
+Бачимо непотрібну колонку: регіон. Вона допоможе нам вивчити групування (ще називають агрегацією, зведеною таблицею, pivot)
+## Групування
+```{r}
+cases <- cases %>%
+  group_by(country, date) %>%
+  summarise(cases = sum(cases))
+
+head(cases %>% arrange(desc(date), desc(cases)))
+```
+
+Нам те саме треба робити з даними смертності та одужань. Не хочеться просто повторювати код. Щоб цього не робити, придумали *функції*. Далі приклад функції, вона має аргументи `x` та `y`, і множить їх.  
+При тому `x` обов'язковий, а `y` має значення за замовчуванням.  
+```{r}
+test = function(x, y = 3) {
+  return(x * y)
+}
+
+test(x = 5) # поверне 15
+test(x = 2, y = 2) # 4
+test(5, 100) # 500
+```
+
+Ура, наша перша функція! У перетворенні даних з широкого формату на довгий у нас зміннються:
+- назва колонки зі значеннями
+- сам датафрейм
+Решта (назви колонок, pivot_longer, групування за країнами щоб позбутись колонки регіону) лишається однаковим для всіх даних про коронавірус.
+
+```{r}
+prepare_covid <- function(df, col_name) {
+  df %>%
+    pivot_longer(cols = -c(Country.Region, Province.State, Lat, Long),
+                 names_to = "date",
+                 names_prefix = "X",
+                 values_to = col_name
+                 # оця назва різна для різних таблиць
+                 ) %>%
+    mutate(date = mdy(date)) %>%
+    select(-c(Lat, Long)) %>%
+    rename(region = Province.State, country = Country.Region) %>%
+    group_by(country, date)
+    # Зверніть увагу, немає `summarize` після `group_by`
+    # ... бо не знайшла простого рішення змінювати назву колонки в цьому синтаксисі
+}
+
+deaths <- prepare_covid(deaths, "deaths") %>%
+  summarise(deaths = sum(deaths))
+
+recovered <- prepare_covid(recovered, "recovered") %>%
+  summarise(recovered = sum(recovered))
+
+recovered
+```
+Написали в 2 рази менше коду завдяки функції.  
+У програмування принцип називається "DRY": Don't Repeat Yourself.  
+До речі, всі бібліотеки в R — це набори функцій. Ви просто завантажуєте функції, які за вас написали інші.
+
+## З'єднання даних (Join).
+Це операція поєднання колонок з різних таблиць за спільною колонкою-ключем, яка однакова в обох таблицях. Таких колонок може бути декілька. 
+Join буває кількох типів (https://dplyr.tidyverse.org/reference/join.html):
+![joins](../img/join.png)
+Ми хочемо з'єднати дані зафіксованих випадків, смертності та одужань від коронавірусу в одну таблицю.
+- Який тип join обрати?
+- Які колонки стануть ключами?
+```{r}
+df <- cases %>%
+  full_join(deaths) %>%
+  full_join(recovered)
+
+df
+```
+```{r}
+df %>% filter(date == "2020-04-04")
+```
+
+```{r}
+write.csv(df, "covid19_clean.csv", row.names = FALSE)
+```
+
+
+## Те саме у таблицях з графічним інтерфейсом
+Відкрийте лінк https://docs.google.com/spreadsheets/d/1_K-ZSmQMlWPsJkoWXmOdDt5gXP-Ve0ZuB77rSRQusZ8/edit?usp=sharing та скопіюйте собі таблицю на гугл-диск
+
+
+## Намалюємо?
+
+Як? Бібліотека `ggplot`
+Синтаксис: `ggplot(data, aes())` — `data` це ваш датафрейм  
+* `aes` які змінні як візуально кодувати, `x` (позиція), `y` (позиція), `color` (колір), `size` (розмір), `alpha` (прозорість) і тощо
+* `geom_…` тип графіка: стовпці, розсіювання, гістограма, площини і ще десятки
+* шкали, теми (оформлення), групування, анотації (підписи, наприклад), заголовки…
+
+```{r}
+df <- read.csv()
+```
+
+
+
+
+--------------------------------------------------
+
+## Додатково
+
+Помітили, наші дані мають сукупну кількість випадків (фіксації хвороби, смерті чи одужання) за день? У наступному чанку зробимо цифри лише зафіксованого на день.
+
+```{r}
+revert_cumsum = function(column) {
+  c(column[1], diff(column))
+  # якщо не поставити функцію `return`, автоматично буде останній результат
+}
+
+diff(c(12, 14, 17, 23, 29, 41)) # приклад з випадковими числами, щоб зрозуміти `diff`
+
+df %>%
+  group_by(country) %>%
+  mutate_at(vars(cases, deaths, recovered), revert_cumsum) %>%
+  ungroup() %>%
+  write.csv("covid19_clean_daily.csv", row.names = F)
+```
+
+
+```{r}
+# Зверніть увагу на html_table: з html прямо в датафрейм, якщо маєм тег <table>
+airtraffic <- read_html("https://www.radarbox.com/statistics/total") %>%
+  html_node("table#datatable") %>%
+  html_table()
+```
+
+
