@@ -220,7 +220,6 @@ for (c in unique(df$country)) {
     mutate(country_mocked = c,
            highlight = country == c) %>%
     rbind(pseudo_df)
-    
 }
 pseudo_df
 ```
