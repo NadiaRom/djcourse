@@ -10,6 +10,7 @@ output: html_notebook
 library(lubridate)
 library(tidyverse)
 library(rvest)
+library(scales)
 ```
 
 ## Завантаження
@@ -149,10 +150,40 @@ write.csv(df, "covid19_clean.csv", row.names = FALSE)
 * шкали, теми (оформлення), групування, анотації (підписи, наприклад), заголовки…
 
 ```{r}
-df <- read.csv()
+df <- read.csv("https://github.com/NadiaRom/djcourse/raw/master/uku2020/day3/covid19_clean.csv") %>%
+  mutate(date = as.Date(date))
 ```
 
 
+### Порахуємо нове поле: кількість днів від першого зафіксованого випадку
+```{r}
+selected_countries <- c("US", "Spain", "Italy", "Germany",
+                        "France", "China", "Iran", "Korea, South",
+                        "Russia", "Turkey", "Poland", "Ukraine")
+
+df <- df %>%
+  filter(country %in% selected_countries) %>%
+  group_by(country) %>%
+  filter(date >= date[which(deaths > 0)[1]]) %>%
+  mutate(day_since_1death = 1:n()) %>%
+  ungroup() %>%
+  mutate(active_cases = cases - recovered - deaths)
+
+
+df
+```
+
+```{r}
+ggplot(df, aes(x = day_since_1death, y = active_cases, group = country, color = country)) +
+  geom_line() +
+  facet_wrap(~country) +
+  scale_y_log10(labels = comma) + 
+  scale_color_manual(values = c("red", "grey", "grey", "grey",
+                                "green", "blue", "grey", "grey",
+                                "orange", "grey", "yellow", "grey")) +
+  theme_minimal()
+  
+```
 
 
 --------------------------------------------------
@@ -176,7 +207,38 @@ df %>%
   write.csv("covid19_clean_daily.csv", row.names = F)
 ```
 
+#### Неочевидний ggplot
+Наприклад, ми хочемо зробити small-multiples, в яких дані всіх країн буде відображено сірим, а однієї, вибраної, країни — виділено кольором.
+Але facet_wrap робить прості одинарні графіки. Вихід: переробити датафрейм
+```{r}
+pseudo_df <- NULL
 
+for (c in unique(df$country)) {
+  pseudo_df <- df %>%
+    mutate(country_mocked = c,
+           highlight = country == c) %>%
+    rbind(pseudo_df)
+    
+}
+pseudo_df
+```
+
+
+```{r}
+ggplot(pseudo_df, aes(x = day_since_1death, y = active_cases, group = country, color = highlight)) +
+  geom_line(size=0.25, show.legend = FALSE) +
+  facet_wrap(~country_mocked) +
+  scale_y_log10(labels = comma) +
+  scale_color_manual(values = c("grey", "red")) +
+  theme_minimal()
+```
+
+```{r}
+ggsave("covid_facets.svg", width = 100, height = 100, units = "mm")
+```
+
+
+#### Невикористані дані
 ```{r}
 # Зверніть увагу на html_table: з html прямо в датафрейм, якщо маєм тег <table>
 airtraffic <- read_html("https://www.radarbox.com/statistics/total") %>%
