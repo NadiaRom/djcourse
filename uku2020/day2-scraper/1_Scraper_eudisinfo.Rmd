@@ -121,7 +121,7 @@ npages <- 30    # скільки сторінок скрейпити
 
 pb <- progress_bar$new(
   format = "  downloading [:bar] :percent in :elapsed ",
-  total = npages, clear = FALSE, width= 60)
+  total = npages + 1, clear = FALSE, width= 60)
 # скопіювала з довідки про progress_bar, змінено лише параметр total
 
 # Вектори, у яких будемо зберігати значення
@@ -132,9 +132,10 @@ links <- c()
 url_template <- "https://euvsdisinfo.eu/disinformation-cases/?offset="
 ```
 
+
 Візьмемо перші 50 сторінок. Всередині цикла те саме, що ми робили з першою сторінкою
 ```{r}
-for (page in 1:npages) {
+for (page in 0:npages) {
   # з'єднуємо рядки: основу url-адреси, № сторінки помножений на 10, бо сторінки йдуть з кроком 10
   url <- str_c(url_template,
                page * 10)
@@ -161,25 +162,27 @@ for (page in 1:npages) {
     c(links, .)
   
   # Ще один важливий крок: затримка між запитами, щоб не зробити DDoS-атаку на сайт
-  Sys.sleep(2)    # 2 секунди програма буде "спати" 
+  Sys.sleep(3)    # 2 секунди програма буде "спати" 
   
   # Оновимо прогрес-бар. Це для комфорту, щоб бачити, скільки ще лишилось сторінок
-  pb$tick()
+  # pb$tick()
+  print(page)
 }
 ```
 
 Перевіримо, вектори мають мати довжиноу 500 при офсеті 50. Далі робимо з них датафрейм і зберігаємо його
 ```{r}
-stopifnot(length(dates) == npages * 10 &
-          length(titles) == npages * 10 &
-          length(links) == npages * 10)
+stopifnot(length(dates) == (npages + 1) * 10 &
+          length(titles) == (npages + 1) * 10 &
+          length(links) == (npages + 1) * 10)
+
 # Якщо довжина кожного з векторів не 500, нам виб'є помилку. Ми просимо R через `stopifnot` вважати помилкою, якщо в результаті скрейпінгу у нас не збігається кільність елементів у колонках.
 
 # датафрейм через пайп одразу йде на зберігання
 data.frame(title = titles,
            date = dates,
            link = links) %>%
-  write.csv("eudisinfo_200_pages.csv",
+  write.csv("eudisinfo_30_pages.csv",
             row.names = FALSE) # щоб не зберігати непотрібну колонку номерів рядків
 ```
 
@@ -190,7 +193,7 @@ df
 ```
 Відскрейпили.
 
-## Основні операції з даними
+## Далі спроби зробити щось з цими даними. Чернетка для наступного заняття.
 
 ```{r}
 # install.packages("lubridate")
@@ -200,9 +203,7 @@ search_str <- "covid.?19|coronavirus|sars.?cov.?2|pandemic|epidemic"
 
 df <- df %>%
   mutate(covid19 = str_detect(str_to_lower(title), search_str),
-         date = dmy(df$date))
-
-df
+         date = dmy(as.character(date)))
 ```
 - `mutate` — створити в дата-фреймі нову колонку з певними значеннями  
 - `dmy` — функція з бібліотеки `lubridate` щоб перетворбвати рядки з датами на формат даних дату  
@@ -211,7 +212,7 @@ df
 
 ```{r}
 df <- df %>% 
-  filter(date > "2020-01-01") %>%
+  filter(date > "2020-01-20") %>%
   arrange(date)
 
 df
@@ -220,6 +221,15 @@ df
 `arrange` — сортування  
 
 ### Проста візуалізація
+
+```{r}
+ggplot(df, aes(x = date, fill = covid19)) +
+  geom_dotplot(binwidth = 1, color = NA)
+```
+
+
+
+
 ```{r}
 ggplot(filter(df, date > "2020-01-20"), aes(date, fill = covid19)) + 
   geom_dotplot(color = NA, binwidth = 1, dotsize = 0.75, stackgroups = TRUE, method = "histodot") +

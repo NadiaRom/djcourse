@@ -1,0 +1,865 @@
+"year","lang","n"
+2010,"(выберите из списка)",81
+2010,"1C",22
+2010,"Asm",53
+2010,"Basic",147
+2010,"C/C++",634
+2010,"C#",185
+2010,"DBase-подобные ",34
+2010,"Fortran",16
+2010,"Haskell",1
+2010,"Java",224
+2010,"JavaScript",23
+2010,"Lisp",3
+2010,"Lua",1
+2010,"Objective-C",9
+2010,"Pascal/Delphi",396
+2010,"Perl",55
+2010,"PHP",347
+2010,"Python",30
+2010,"Ruby",6
+2010,"другой",126
+2014,"1C",20
+2014,"Asm",65
+2014,"Basic",1571
+2014,"C#",218
+2014,"Fortran",25
+2014,"Haskell",1
+2014,"Java",243
+2014,"JavaScript",113
+2014,"Lisp",1
+2014,"Lua",7
+2014,"Objective-C",48
+2014,"Pascal/Delphi",2352
+2014,"Perl",25
+2014,"PHP",260
+2014,"Python",65
+2014,"Ruby",34
+2014,"ActionScript",38
+2014,"Algol",3
+2014,"C",288
+2014,"C++",494
+2014,"ColdFusion",1
+2014,"Focal",5
+2014,"Groovy",4
+2014,"PL/SQL",14
+2014,"Prolog",1
+2014,"QBasic",4
+2014,"Scala",5
+2014,"Sinclair BASIC",1
+2014,"Algo",1
+2014,"Go",2
+2014,"Logo",10
+2014,"MK-61",2
+2014,"Visual Basic",6
+2014,"Лого",1
+2014,"МК-61",4
+2014,"Фокал",2
+2014,"basic",1
+2014,"BASIC",1
+2014,"Erlang",4
+2014,"Forth",1
+2014,"fortran",4
+2014,"GWBasic",1
+2014,"qbasic",1
+2014,"T-SQL",6
+2014,"мк-52",1
+2014,"МК-52",1
+2014,"УАМ",1
+2014,"abac",1
+2014,"Abap",1
+2014,"ABAP",4
+2014,"actionscript 2",1
+2014,"algol",1
+2014,"Algol 60",1
+2014,"android",1
+2014,"Assember калькулятора Б3-34",1
+2014,"assembler",2
+2014,"autoit",1
+2014,"Autoit",1
+2014,"AutoIt 3",1
+2014,"bytecode",1
+2014,"C\AL",1
+2014,"CoffeeScript",1
+2014,"Dbase (Clipper, Foxpro, .. )",14
+2014,"dynamics",1
+2014,"FORNTRAN-77",1
+2014,"ForTran",1
+2014,"FORTRAN",8
+2014,"Fortran-66",1
+2014,"foxpro",1
+2014,"gw-basic",1
+2014,"GW-BASIC",2
+2014,"Haxe",1
+2014,"HEX bytecodes",1
+2014,"html",1
+2014,"i8080 machine code",1
+2014,"Labview",1
+2014,"Logo writer",1
+2014,"mk",1
+2014,"mk52",1
+2014,"mk52 codes",1
+2014,"MK63",1
+2014,"MSX BASIC",1
+2014,"Objective Caml",1
+2014,"PDP-11 ASM",1
+2014,"PL/1",2
+2014,"PL/I (at 1983)",1
+2014,"PL\1",1
+2014,"pseudocode",1
+2014,"Q Basic",1
+2014,"QA",1
+2014,"QBASIC",1
+2014,"qwbasic",1
+2014,"R",1
+2014,"ROO",1
+2014,"Shell",1
+2014,"SmallTalk",1
+2014,"Tcl",1
+2014,"VB",1
+2014,"VBS",1
+2014,"Visual basic",1
+2014,"VisualBasic",3
+2014,"ZX-basic",1
+2014,"Алго",1
+2014,"АЛГО",1
+2014,"АП-2 (язык для НАИРИ)",1
+2014,"Б3-34",1
+2014,"в кодах М-222",1
+2014,"Калькулятор MK61",1
+2014,"калькулятро МК52",1
+2014,"Кенгурёнок",1
+2014,"Коды программируемого микрокалькулятора МК-61",1
+2014,"КуМир",1
+2014,"Машинный код МК-61",1
+2014,"Машкоды мк 52",1
+2014,"паркетчик",1
+2014,"ПК ПМК",1
+2014,"ПМК-61 ""Электроника""",1
+2014,"Программируемый калькулятор МК-61",1
+2014,"РАЯ - Русский Алгоритмический Язык",1
+2014,"только начинаю",1
+2014,"УАМ. українська алгоритмічна мова",1
+2014,"школьный алгоритмический",1
+2014,"Электроника MK-61",1
+2014,"Электроника МК61",1
+2014,"языки программисрования",1
+2014,"ЯМК",1
+2015,"1C",2
+2015,"Basic",1419
+2015,"C#",197
+2015,"Fortran",45
+2015,"Haskell",1
+2015,"Java",272
+2015,"JavaScript",181
+2015,"Lisp",2
+2015,"Lua",3
+2015,"Objective-C",32
+2015,"Pascal/Delphi",2243
+2015,"Perl",27
+2015,"PHP",283
+2015,"Python",122
+2015,"Ruby",50
+2015,"ActionScript",20
+2015,"Algol",3
+2015,"C",360
+2015,"C++",454
+2015,"Clarion",1
+2015,"Clipper",2
+2015,"Cobol",1
+2015,"Focal",4
+2015,"Groovy",1
+2015,"PL/SQL",9
+2015,"PowerBuilder",1
+2015,"Scala",3
+2015,"Scheme",1
+2015,"SQL",1
+2015,"Apex",3
+2015,"Dbase",5
+2015,"Delphi",6
+2015,"Go",2
+2015,"Liberty Basic",1
+2015,"Logo",8
+2015,"LOGO",1
+2015,"Лого",1
+2015,"Erlang",1
+2015,"Forth",3
+2015,"PASCAL",1
+2015,"УАМ",1
+2015,"algol",2
+2015,"Algol 60",1
+2015,"Shell",4
+2015,"АЛГО",1
+2015,"",25
+2015,"1с",2
+2015,"1С",3
+2015,"ACTION SCRIPT",1
+2015,"ActionScript2",1
+2015,"ActionScript3",1
+2015,"As3",1
+2015,"asm",1
+2015,"ASM",64
+2015,"dBaseIII+",1
+2015,"Delfi",1
+2015,"Flex",1
+2015,"Fortram ( mainframe)",1
+2015,"Fortran 77",1
+2015,"GML (Game Maker Language)",1
+2015,"LabView",1
+2015,"Matlab",1
+2015,"Matlab, SystemVerilog",1
+2015,"mk 52",2
+2015,"mk61",1
+2015,"Oberon",1
+2015,"paskal",1
+2015,"PL/M",1
+2015,"PLEX",1
+2015,"PowerShell",1
+2015,"SAS Base/Macro",1
+2015,"Shell ",1
+2015,"интересен результат",1
+2015,"лого",1
+2015,"не помню",1
+2015,"РАЯ (Русский Алгоритмический Язык)",1
+2015,"Русский алгоритмический язык",1
+2015,"Электроника MK-52",1
+2016,"1C",24
+2016,"Basic",1191
+2016,"C#",232
+2016,"Fortran",44
+2016,"Java",435
+2016,"JavaScript",240
+2016,"Lua",4
+2016,"Objective-C",33
+2016,"Pascal/Delphi",2317
+2016,"Perl",18
+2016,"PHP",281
+2016,"Python",177
+2016,"Ruby",52
+2016,"ActionScript",32
+2016,"Algol",2
+2016,"C",319
+2016,"C++",595
+2016,"DBase",10
+2016,"Focal",5
+2016,"FoxPro",3
+2016,"PL/I",2
+2016,"PL/SQL",15
+2016,"QBasic",1
+2016,"Scala",9
+2016,"Algo",1
+2016,"Apex",1
+2016,"APL",2
+2016,"Go",2
+2016,"Logo",4
+2016,"Visual Basic",8
+2016,"Erlang",4
+2016,"Forth",1
+2016,"Quick Basic",1
+2016,"T-SQL",9
+2016,"машинные коды КР580ВМ80А",1
+2016,"УАМ",1
+2016,"AutoIt 3",1
+2016,"Haxe",1
+2016,"R",7
+2016,"Shell",2
+2016,"Visual basic",1
+2016,"VisualBasic",1
+2016,"",2
+2016,"ASM",54
+2016,"mk61",1
+2016,"PL/M",1
+2016,"1",1
+2016,"ABC",1
+2016,"AutoIT",1
+2016,"AutoIt v.3",1
+2016,"Blitz3d",1
+2016,"citizen scientific calculator Simple BASIC language",1
+2016,"GML",1
+2016,"gwbasic",1
+2016,"Macro-11",1
+2016,"MQL4",1
+2016,"None",1
+2016,"pascal",2
+2016,"Pega PRPC",1
+2016,"Sinclair Basic",1
+2016,"STL",1
+2016,"Swift",11
+2016,"Warcraft world editor",2
+2016,"Интал",2
+2016,"навчально алгоритмічна мова",1
+2016,"паскаль",1
+2016,"Школьный алгоритмический язык https://ru.wikipedia.org/wiki/%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B9_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA",1
+2017,"1C",23
+2017,"Basic",1497
+2017,"C#",324
+2017,"Fortran",75
+2017,"Haskell",1
+2017,"Java",608
+2017,"JavaScript",382
+2017,"Objective-C",46
+2017,"Pascal/Delphi",2869
+2017,"Perl",35
+2017,"PHP",384
+2017,"Python",247
+2017,"Ruby",61
+2017,"ActionScript",32
+2017,"Algol",2
+2017,"C",457
+2017,"C++",801
+2017,"Focal",4
+2017,"FoxPro",1
+2017,"PL/I",1
+2017,"PL/SQL",21
+2017,"Scala",9
+2017,"Scheme",1
+2017,"Algol-60",1
+2017,"Apex",1
+2017,"Assembler",3
+2017,"Delphi",4
+2017,"FOCAL",1
+2017,"Go",3
+2017,"Logo",3
+2017,"LOGO",1
+2017,"MK-61",1
+2017,"Pascal",22
+2017,"Visual Basic",10
+2017,"Лого",1
+2017,"МК-61",3
+2017,"Фокал",1
+2017,"Электроника МК-61",1
+2017,"Erlang",3
+2017,"qbasic",2
+2017,"T-SQL",8
+2017,"калькулятор",1
+2017,"УАМ",1
+2017,"ABAP",1
+2017,"foxpro",1
+2017,"PL/1",5
+2017,"VB",1
+2017,"VBS",1
+2017,"VisualBasic",3
+2017,"АЛГО",1
+2017,"Б3-34",1
+2017,"",33
+2017,"ASM",81
+2017,"PL/M",1
+2017,"не помню",1
+2017,"pascal",2
+2017,"Swift",34
+2017,"Интал",2
+2017,"?",1
+2017,"actionscript",1
+2017,"Asembler",1
+2017,"ASM B3-34",1
+2017,"Assembly ",1
+2017,"AutoIt",1
+2017,"bash",2
+2017,"Bash",1
+2017,"BASIC DOS",1
+2017,"C++ Builder",1
+2017,"calculator mk52",1
+2017,"clipper",1
+2017,"clojure",1
+2017,"DBase dialect",3
+2017,"delphi",1
+2017,"Elixir",1
+2017,"Expression2 in Garry's Mod",1
+2017,"f",1
+2017,"F#",1
+2017,"fokal",1
+2017,"HTML",2
+2017,"Jass",1
+2017,"Kotlin",1
+2017,"logo",1
+2017,"Logo Writer",1
+2017,"lua",2
+2017,"LUA",1
+2017,"Maple",1
+2017,"MK-54",1
+2017,"MK-61 pseudo assembler",1
+2017,"MK54",1
+2017,"Pascal ",1
+2017,"Paskal",2
+2017,"Pawn",1
+2017,"pl-1",1
+2017,"Pl/1",1
+2017,"PL1",1
+2017,"Rust",1
+2017,"SAS",1
+2017,"Turbo Basic",1
+2017,"Turbo Pascal",1
+2017,"TypeScript",1
+2017,"VBA",5
+2017,"Vbasic",1
+2017,"visualbasic",1
+2017,"ZX Spectrum",1
+2017,"Алгоритмический язык",1
+2017,"алмир",1
+2017,"Байт код",1
+2017,"ИНН не",1
+2017,"калькулятор МК52",1
+2017,"код Б3-21",1
+2017,"Команди ПМК Электроника МК-61",1
+2017,"мк61",1
+2017,"МК61",1
+2017,"Электроника МК 52",1
+2018,"1C",23
+2018,"Basic",1260
+2018,"C#",282
+2018,"Fortran",52
+2018,"Haskell",1
+2018,"Java",521
+2018,"JavaScript",427
+2018,"Objective-C",30
+2018,"Pascal/Delphi",2521
+2018,"Perl",20
+2018,"PHP",358
+2018,"Python",254
+2018,"Ruby",56
+2018,"ActionScript",25
+2018,"C",415
+2018,"C++",774
+2018,"CAL",1
+2018,"Clipper",1
+2018,"Focal",6
+2018,"PL-1",1
+2018,"PL/SQL",22
+2018,"QBasic",2
+2018,"Scala",6
+2018,"Algol-60",2
+2018,"Apex",2
+2018,"APL",1
+2018,"Assembler",2
+2018,"Delphi",2
+2018,"FOCAL",2
+2018,"Go",8
+2018,"Logo",5
+2018,"LOGO",1
+2018,"machine code",1
+2018,"Pascal",9
+2018,"Visual Basic",11
+2018,"Лого",1
+2018,"МК-61",2
+2018,"Фокал",1
+2018,"Электроника МК-52",1
+2018,"basic",1
+2018,"BASIC",1
+2018,"Erlang",2
+2018,"Forth",3
+2018,"qbasic",1
+2018,"T-SQL",21
+2018,"УАМ",1
+2018,"assembler",3
+2018,"PL/1",3
+2018,"R",6
+2018,"Shell",2
+2018,"VisualBasic",2
+2018,"Б3-34",1
+2018,"КуМир",1
+2018,"",25
+2018,"ASM",63
+2018,"Matlab",2
+2018,"GML",1
+2018,"gwbasic",1
+2018,"pascal",1
+2018,"Swift",43
+2018,"HTML",1
+2018,"Jass",1
+2018,"Kotlin",4
+2018,"Pascal ",1
+2018,"Rust",2
+2018,"Turbo Pascal",2
+2018,"TypeScript",5
+2018,"МК61",1
+2018,"  ЯМК-21",1
+2018,"""Алмир"" на МИР-1 и ""Аналитик"" на МИР-2",1
+2018,"""Ассемблер"" ПМК ""Электроника""",1
+2018,"Assembler процессора Motorola 6502",1
+2018,"AutoIt3",1
+2018,"Blitz 3D",1
+2018,"Clojure",5
+2018,"DBase Dialect",4
+2018,"Electronika MK61",1
+2018,"focal",1
+2018,"Foxpro",1
+2018,"GameMakerLanguage",1
+2018,"labview",1
+2018,"Math formulas",1
+2018,"MK-52",1
+2018,"MK61",1
+2018,"MS Access 97",1
+2018,"Node.js",1
+2018,"northon be.exe/msdos batch",1
+2018,"Pasca",1
+2018,"progress ",1
+2018,"q basic",1
+2018,"Qbasic",1
+2018,"Scratch",1
+2018,"Small Basic",1
+2018,"TurboPascal",1
+2018,"Turtle",1
+2018,"UOPilot",1
+2018,"VB script",1
+2018,"VB.NET",1
+2018,"VHDL",2
+2018,"WebQL",1
+2018,"X++",1
+2018,"БК-64",1
+2018,"Калькулятор мк",1
+2018,"Код для МК-52/МК-61",1
+2018,"Паскаль)))",1
+2018,"Программируемый микрокалькулятор",1
+2018,"РАПИРА",1
+2018,"укр мова",1
+2018,"Учебный алгоритмический язык",1
+2018,"фокал",1
+2018,"ЯМК для мк-61",1
+2019,"1C",29
+2019,"Basic",1243
+2019,"Fortran",53
+2019,"Java",787
+2019,"JavaScript",637
+2019,"Lua",1
+2019,"Objective-C",26
+2019,"Pascal/Delphi",2892
+2019,"Perl",26
+2019,"PHP",452
+2019,"Python",401
+2019,"Ruby",59
+2019,"ActionScript",23
+2019,"Algol",3
+2019,"C",645
+2019,"C++",1130
+2019,"Focal",2
+2019,"FoxPro",2
+2019,"Lingo",1
+2019,"PL-1",2
+2019,"PL/SQL",1
+2019,"QBasic",2
+2019,"Scala",9
+2019,"Scheme",1
+2019,"Assembler",1
+2019,"Delphi",6
+2019,"Go",21
+2019,"Logo",3
+2019,"LOGO",1
+2019,"MK-61",2
+2019,"Pascal",17
+2019,"МК-61",2
+2019,"ALGO",1
+2019,"basic",2
+2019,"Erlang",8
+2019,"fortran",1
+2019,"qbasic",1
+2019,"УАМ",1
+2019,"FORTRAN",1
+2019,"foxpro",1
+2019,"Haxe",1
+2019,"PL/1",1
+2019,"R",4
+2019,"Shell",3
+2019,"VBS",1
+2019,"Visual basic",1
+2019,"VisualBasic",3
+2019,"",26
+2019,"ASM",88
+2019,"Электроника MK-52",1
+2019,"GML",1
+2019,"pascal",1
+2019,"Swift",43
+2019,"DBase dialect",6
+2019,"HTML",1
+2019,"Kotlin",3
+2019,"logo",2
+2019,"Pascal ",1
+2019,"TypeScript",12
+2019,"МК61",1
+2019,"AutoIt3",1
+2019,"MK-52",2
+2019,"Scratch",1
+2019,"VHDL",1
+2019,"фокал",1
+2019,"ABL",1
+2019,"Algol60",1
+2019,"Apex (Salesforce)",1
+2019,"AS3",1
+2019,"bat/cmd",1
+2019,"C/AL",1
+2019,"CSS",1
+2019,"Dart",2
+2019,"Dart/Flutter",1
+2019,"FoxBase",1
+2019,"kotlin",1
+2019,"matlab",1
+2019,"Microcodes MK-61",1
+2019,"PL-SQL",1
+2019,"pl/1",1
+2019,"Q basic ",1
+2019,"RPA",1
+2019,"Sql",1
+2019,"Swift+Objective-C",1
+2019,"Turbopascal",1
+2019,"Vb Script",1
+2019,"vhdl",1
+2019,"visual basic",2
+2019,"x++",1
+2019,"Алгол",1
+2019,"АЛМИР-65",1
+2019,"Асемблер Промінь-1",1
+2019,"коди для калькулятора ""электроника МК 52""",1
+2019,"С#",432
+2019,"Электроника МК-61, программирование в кодах",1
+2019,"Я только учусь",1
+2019,"ЯМК-54",1
+2020,"1C",47
+2020,"Basic",1179
+2020,"Fortran",62
+2020,"Java",864
+2020,"JavaScript",787
+2020,"Lua",4
+2020,"Objective-C",22
+2020,"Pascal/Delphi",2792
+2020,"Perl",18
+2020,"PHP",489
+2020,"Python",543
+2020,"Ruby",61
+2020,"ActionScript",12
+2020,"Algol",4
+2020,"C",719
+2020,"C++",1343
+2020,"Focal",3
+2020,"FoxPro",3
+2020,"PL/SQL",1
+2020,"QBasic",1
+2020,"Scala",5
+2020,"SQL",1
+2020,"БЗ-34",1
+2020,"Algol-60",1
+2020,"Apex",1
+2020,"Assembler",1
+2020,"Delphi",3
+2020,"Go",17
+2020,"Logo",7
+2020,"Pascal",24
+2020,"МК-61",1
+2020,"Электроника МК-52",1
+2020,"ALGO",1
+2020,"Erlang",10
+2020,"T-SQL",1
+2020,"УАМ",1
+2020,"ABAP",1
+2020,"algol",1
+2020,"assembler",1
+2020,"PL/1",3
+2020,"R",6
+2020,"Tcl",1
+2020,"VisualBasic",2
+2020,"КуМир",1
+2020,"",30
+2020,"1с",1
+2020,"ASM",51
+2020,"LabView",1
+2020,"Matlab",3
+2020,"AutoIT",1
+2020,"pascal",2
+2020,"Swift",49
+2020,"AutoIt",1
+2020,"DBase dialect",8
+2020,"Elixir",1
+2020,"HTML",1
+2020,"Kotlin",13
+2020,"lua",1
+2020,"Pawn",4
+2020,"PL1",2
+2020,"SAS",2
+2020,"Turbo Basic",1
+2020,"Turbo Pascal",2
+2020,"TypeScript",21
+2020,"VBA",7
+2020,"focal",1
+2020,"Foxpro",1
+2020,"X++",1
+2020,"Dart",4
+2020,"С#",445
+2020,"ALGOL",1
+2020,"Anal penetration",1
+2020,"apex",1
+2020,"APEX",1
+2020,"Arduino",1
+2020,"Autohotkey",1
+2020,"B3-34",1
+2020,"Basic MicroFrend",1
+2020,"BASIC-86",1
+2020,"Basic, Pascal",1
+2020,"Blueprint",1
+2020,"cmd/bat",1
+2020,"Elixir ",1
+2020,"Fortran 4",1
+2020,"groovy",1
+2020,"GW Basic",1
+2020,"lisp",1
+2020,"LISP",1
+2020,"Nim",2
+2020,"Octave",1
+2020,"PAWN",1
+2020,"PL SQL",1
+2020,"Pl/M",1
+2020,"Progrqmming calculator B3-34",1
+2020,"Q-Basic",1
+2020,"Racket",2
+2020,"Salesforce",1
+2020,"SmallBasic",1
+2020,"turbo pascal",1
+2020,"Unix Shell",3
+2020,"АЛМИР",2
+2020,"АНАЛИТИК на МИР-2",1
+2020,"Асемблер",1
+2020,"БЕЙСИК (версия 1985.11.01.)  для микро-ЭВМ <Электроника МС 0511>",1
+2020,"блокопитон",1
+2020,"Еще не написал",1
+2020,"Интел",1
+2020,"Калькулятор Електроника МК52",1
+2020,"калькулятор МК-52",1
+2020,"На мові комп""ютера ""Мир-1""",1
+2020,"Руский",1
+2020,"Українською",1
+NA,"(другой)",1
+NA,"1C",48
+NA,"Asm",114
+NA,"Basic",2293
+NA,"C#",406
+NA,"Fortran",96
+NA,"Haskell",2
+NA,"Java",343
+NA,"JavaScript",93
+NA,"Lisp",3
+NA,"Lua",4
+NA,"Objective-C",37
+NA,"Pascal/Delphi",3299
+NA,"Perl",87
+NA,"PHP",595
+NA,"Python",68
+NA,"Ruby",39
+NA,"ActionScript",59
+NA,"Algol",4
+NA,"as2",1
+NA,"Assembler, Prolog",1
+NA,"binary code for M-22",1
+NA,"C",490
+NA,"c, asm",1
+NA,"C++",919
+NA,"CAL",1
+NA,"Centura",1
+NA,"Clarion",2
+NA,"Clipper",3
+NA,"Cobol",2
+NA,"ColdFusion",1
+NA,"DBase",18
+NA,"Elektronika MK-52",2
+NA,"Focal",6
+NA,"Fox Pro",1
+NA,"FoxPro",7
+NA,"Groovy",2
+NA,"html/css",1
+NA,"ISBL",1
+NA,"LD,ST",1
+NA,"Lingo",1
+NA,"Lotus Script",1
+NA,"lotusscript",1
+NA,"MK-54 (~like asm)",1
+NA,"MK61 pseudocode",1
+NA,"PL-1",2
+NA,"PL/I",2
+NA,"PL/SQL",7
+NA,"PL\SQL",1
+NA,"PowerBuilder",1
+NA,"Prolog",1
+NA,"QBasic",1
+NA,"Scala",6
+NA,"Scheme",1
+NA,"Sinclair BASIC",1
+NA,"SQL",1
+NA,"XSLT",1
+NA,"Ассембер БЭСМ-6",1
+NA,"БЗ-34",2
+NA,"машинный код i8080",1
+NA,"МК-62",1
+NA,"мнемокоды МК-52",1
+NA,"Рапира",1
+NA,"скриптовый кастомный",1
+NA,"Algo",1
+NA,"Algol-60",1
+NA,"Apex",1
+NA,"APL",1
+NA,"asm mk61",1
+NA,"Assembler",3
+NA,"calculator code mk65 ",1
+NA,"D",1
+NA,"Dbase",13
+NA,"Delphi",1
+NA,"FOCAL",1
+NA,"Go",1
+NA,"Liberty Basic",1
+NA,"Logo",18
+NA,"LOGO",2
+NA,"machine code",2
+NA,"MK-61",2
+NA,"Oak",1
+NA,"ocaml",1
+NA,"OCaml",1
+NA,"Pascal",6
+NA,"rexx",1
+NA,"SinclairBasic",1
+NA,"Smalltalk",1
+NA,"specialized, low level",1
+NA,"Visual Basic",14
+NA,"Visual Basic 6",1
+NA,"асемблер МК-61",1
+NA,"ассамблер для МК-61",1
+NA,"Ассемблер калькулятора",1
+NA,"Е-Практикум",1
+NA,"калькулятор МК 61",1
+NA,"Кумир",1
+NA,"Лого",4
+NA,"МК-61",2
+NA,"українська мова",1
+NA,"Фокал",2
+NA,"Электроника МК-52",1
+NA,"Электроника МК-61",2
+NA,"Электроника МК-64",1
+NA," Modula-2",1
+NA,"ALGO",1
+NA,"ASM for Elektonika MK61",1
+NA,"basic",1
+NA,"BASIC",3
+NA,"DBase-подобный ",6
+NA,"Electronica MK-52",1
+NA,"Erlang",1
+NA,"Fokal",2
+NA,"force.com",1
+NA,"Forth",1
+NA,"fortran",2
+NA,"GWBasic",1
+NA,"http://en.wikipedia.org/wiki/FOCAL_(programming_language)",1
+NA,"MK 61 коды",1
+NA,"Modula2",1
+NA,"Ocaml",1
+NA,"PASCAL",1
+NA,"Power Builder",1
+NA,"qbasic",1
+NA,"Quick Basic",1
+NA,"Sinclar Basic",1
+NA,"T-SQL",1
+NA,"Ассеблер калькулятора Б3-34",1
+NA,"калькулятор",1
+NA,"калькулятор БЗ-34",1
+NA,"калькулятор МК-61",1
+NA,"машинные коды КР580ВМ80А",1
+NA,"машинный код",1
+NA,"мк-52",1
+NA,"МК-52",1
+NA,"МК-54",2
+NA,"ПМК ""Электроника МК-54""",1
+NA,"УАМ",1
+NA,"Учебный алгоритмический язык (УАЯ)",1
