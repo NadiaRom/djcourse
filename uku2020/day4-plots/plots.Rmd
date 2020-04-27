@@ -1,0 +1,118 @@
+---
+title: "Plots with ggplot"
+output: html_notebook
+---
+```{r}
+library(tidyverse)
+library(lubridate)
+library(scales)
+```
+
+Ggplot2 — частина добре знайомої нам бібліотеки Tidyverse.
+Принцип роботи ggplot це "граматика даних", заснована на ідех візуального кодування. Документація з купою прикладів тут: https://ggplot2.tidyverse.org/, а ось cheetsheet-шпаргалка: https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf
+Структура ggplot-графіка така:
+![схема](ggplot_scheme.png)
+
+Спробуємо:
+Як завжди, все починається з даних
+```{r}
+df <- read_csv("google_trends_joined.csv")
+```
+Наші дані з гугл-трендів. Це пошук порід собачок, скачала ті, які згадала прямо з цього сайту: https://trends.google.com/trends/explore?date=2008-01-01%202020-04-26&geo=UA&q=%D1%86%D1%83%D1%86%D0%B5%D0%BD%D1%8F%D1%82%D0%B0
+
+# Гра: задаємо питання і малює графіки, щоб знайти відповідь.
+Наприклад, в якийсь момент Сіба-Іну стали популярні
+
+```{r}
+df_siba <- df %>%
+  filter(breed == "Shiba Inu")
+
+ggplot(df_siba, aes(date, searched)) %>%
+  geom_line()
+
+```
+
+
+
+# Графіки — дуже крутий спосіб знаходити патерни в даних, шукати закономірності й відхилення.
+https://texty.org.ua/d/2018/twitter/
+Намалюємо такий же графік
+```{r}
+tw_v <- read_csv("vakarchuk_twitter.csv") %>%
+  mutate(created_at = ymd_hms(created_at))
+tw_k <- read_csv("kamaliia_twitter.csv") %>%
+  mutate(created_at = ymd_hms(created_at))
+
+ggplot(sample_frac(tw_k, 0.3), aes(order, created_at)) +
+  geom_point(size=0.1, alpha=0.2)
+
+```
+
+
+
+
+
+# Лайфхак, щоб з'єднати гугл-тренди, можна розібрати як завання з зірочкою
+```{r}
+read_dog <- function(filename) {
+  read.csv(filename, skip=2, as.is = T) %>%
+    mutate_all(~ str_replace(., "<1", "0")) %>%
+    pivot_longer(cols = -c(Month),
+                 names_to = "breed",
+                 values_to = "searched") %>%
+    mutate(breed = str_remove_all(breed, "...Ukraine.") %>%
+             str_replace_all("\\.", " "),
+           searched = as.numeric(searched),
+           Month = str_c(Month, "-01") %>%
+             as.Date()
+           ) %>%
+    rename(date = Month)
+}
+
+
+find_proportion <- function(df1, df2, intersecting) {
+  searched1 <- df1 %>%
+    filter(breed == intersecting) %>%
+    summarise(max(searched)) %>%
+    .[[1,1]]
+  
+  searched2 <- df2 %>%
+    filter(breed == intersecting) %>%
+    summarise(max(searched)) %>%
+    .[[1,1]]
+  
+  searched2 / searched1
+}
+
+files <- str_c("data/", list.files("data"))
+
+df <- read_dog(files[1])
+
+for (i in 2:length(files)) {
+  df2 <- read_dog(files[i])
+  intersecting <- df %>%
+    filter(breed %in% df2$breed) %>%
+    select(breed) %>%
+    .[[1, "breed"]]
+  
+  coef <- find_proportion(df, df2, intersecting)
+  
+  df <- df %>%
+    mutate(searched = round(searched * coef)) %>%
+    filter(breed != intersecting) %>%
+    rbind(df2)
+}
+df$searched %>% max()
+
+df <- df %>%
+  arrange(date) %>%
+  mutate(searched = searched / max(searched) * 100)
+
+# df %>% write.csv("google_trends_joined.csv", row.names = FALSE)
+
+```
+
+
+
+
+
