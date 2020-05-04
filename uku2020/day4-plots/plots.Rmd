@@ -4,6 +4,7 @@ output: html_notebook
 ---
 ```{r}
 library(tidyverse)
+library(ggplot2)
 library(lubridate)
 library(scales)
 ```
@@ -16,43 +17,137 @@ Ggplot2 — частина добре знайомої нам бібліотек
 Спробуємо:
 Як завжди, все починається з даних
 ```{r}
-df <- read_csv("google_trends_joined.csv")
+df <- read_csv("https://raw.githubusercontent.com/NadiaRom/djcourse/master/uku2020/day4-plots/google_trends_joined.csv") %>%
+  mutate(date = as.Date(date))
 ```
+
 Наші дані з гугл-трендів. Це пошук порід собачок, скачала ті, які згадала прямо з цього сайту: https://trends.google.com/trends/explore?date=2008-01-01%202020-04-26&geo=UA&q=%D1%86%D1%83%D1%86%D0%B5%D0%BD%D1%8F%D1%82%D0%B0
 
 # Гра: задаємо питання і малює графіки, щоб знайти відповідь.
 Наприклад, в якийсь момент Сіба-Іну стали популярні
 
 ```{r}
-df_siba <- df %>%
-  filter(breed == "Shiba Inu")
+df_spj <- df %>%
+  filter(breed %in% c("Shiba Inu", "Pug", "Jack Russell Terrier"))
 
-ggplot(df_siba, aes(date, searched)) %>%
-  geom_line()
+ggplot(df_spj, aes(date, searched, color = breed)) +
+  geom_step() +
+  scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
+  theme_minimal()
+  # geom_point()
+
+ggsave("shiba_pug_jack.svg")
 
 ```
-
 
 
 # Графіки — дуже крутий спосіб знаходити патерни в даних, шукати закономірності й відхилення.
 https://texty.org.ua/d/2018/twitter/
 Намалюємо такий же графік
+
+```{r}
+# Theme
+
+my_theme <- theme(text = element_text(color = "#000000", family = "monospace"),
+        plot.margin = margin(1, 1, 1, 1, unit = "cm"),
+        panel.spacing = unit(2, "lines"),
+        plot.title = element_text(size = 14, face = "bold",
+                                  margin = margin(b = 1, unit = "cm")),
+        plot.caption = element_text(color = "#525252", face = "italic", size = 5,
+                                     margin = margin(t=0.5, unit = "cm")),
+        axis.title = element_text(size = 6),
+        axis.title.x = element_text(margin = margin(t=0.5, unit = "cm"), hjust=0),
+        axis.title.y = element_text(margin = margin(r=0.5, unit = "cm")),
+        strip.text = element_text(size = 10, face = "bold", hjust = 0,
+                                  margin = margin(b = 0.2, unit = "cm")),
+        axis.text = element_text(size = 5, color = "#525252"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_line(colour = "#bdbdbd", size = 0.1)
+        )
+```
+
 ```{r}
 tw_v <- read_csv("vakarchuk_twitter.csv") %>%
-  mutate(created_at = ymd_hms(created_at))
-tw_k <- read_csv("kamaliia_twitter.csv") %>%
-  mutate(created_at = ymd_hms(created_at))
+  mutate(created_at = ymd_hms(created_at),
+         who = "Вакарчук") %>%
+  sample_n(75000)
 
-ggplot(sample_frac(tw_k, 0.3), aes(order, created_at)) +
-  geom_point(size=0.1, alpha=0.2)
+tw_k <- read_csv("kamaliia_twitter.csv") %>%
+  mutate(created_at = ymd_hms(created_at),
+         who = "Камалія") %>%
+  sample_n(75000)
+
+tw <- rbind(tw_v, tw_k)
+remove(tw_k, tw_v) 
+
+ggplot(tw, aes(order, created_at)) +
+  geom_point(alpha = 0.03, color = "#2E54E8", size = 0.1) +
+  scale_x_continuous(labels = comma) +
+  # Розібралась: scales = "free" працює з facet_wrap, але не з facet_grid
+  facet_wrap(vars(who), scales = "free") +
+  labs(y = "Рік реєстріції падписників у Твіттер",
+       x = "Порядковий номер підписників",
+       title = "Хто купив твіттер-ботів?",
+       caption = "Дані: Twitter") +
+  theme_minimal() + my_theme    # див. вище, тепер цю тему можна всюди додавати
+  
+
+# Не зберігайте 100500 точок у векторних форматах (svg), бо це буде дуже великий файл, з яким неможливо працювати
+ggsave("plot_twitter_both.png", width = 16, height = 10, units = "cm")
+
 
 ```
 
+## Неможливо показати все-все
+```{r}
+ggplot(df, aes(date, searched, color = breed)) +
+  geom_step() +
+  scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
+  theme_minimal()
+```
+
+Про такі графіки писав Альберто Каїро, типовий приклад перевантаженого графіка
+Small multiples пішать на допомогу
+
+```{r}
+
+ggplot(df, aes(date, searched)) +
+  geom_area(fill = "#01665e") +
+  scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
+  facet_wrap(vars(breed)) +
+  labs(title = "Клікабельні песики",
+       subtitle = "Динаміка пошукових запитів за породами собак,\n% від максимального",
+       caption = "Дані: Google Trends",
+       x = "дата",
+       y = "") +
+  theme_minimal() +
+  theme(text = element_text(family = "Source Sans Pro"),
+        plot.margin = margin(2, 2, 2, 2, "cm"),
+        axis.title.y = element_blank())
+```
+
+Інтерактив у плотлі — можна додати тултіп — підказку при наведенні
+```{r}
+install.packages("plotly")
+library(plotly)
+
+allbreeds <- ggplot(df, aes(date, searched, group=breed)) +
+  geom_line(color="grey") +
+  scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
+  theme_minimal()
+
+allbreeds
+
+ggsave("breeds_grey.svg", plot=allbreeds, device="svg", width = 16, height = 10, units = "cm")
+
+p <- ggplotly(allbreeds, tooltip = c("breed"))
+
+p
+```
 
 
-
-
-# Лайфхак, щоб з'єднати гугл-тренди, можна розібрати як завання з зірочкою
+# Лайфхак, щоб з'єднати гугл-тренди
+Лишила тому, що робила це аби зробити гарні дані для ggplot, можна розібрати як завання з зірочкою
 ```{r}
 read_dog <- function(filename) {
   read.csv(filename, skip=2, as.is = T) %>%
