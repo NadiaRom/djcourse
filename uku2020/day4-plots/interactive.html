@@ -10,6 +10,19 @@
     cursor: pointer;
   }
   
+  figure {
+    margin: 0;
+  }
+  
+  figure svg {
+    max-height: 80vh;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 2em auto 3em auto;
+  }
+  
   figure svg #doglines polyline {
     stroke: #525252;
     opacity: 0.35;
@@ -24,9 +37,13 @@
   }
 </style>
 
-<h2>Клікабельні собачки</h2>
-<h3>Пошукові запити породи <select required="false"></select></h3>
-<figure></figure>
+<main>
+  <h2>Клікабельні собачки</h2>
+  <h3>
+    Пошукові запити породи <select></select>
+  </h3>
+  <figure></figure>
+</main>
   
 <script src="https://d3js.org/d3.v5.min.js"></script> 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -57,7 +74,7 @@ d3.xml("breeds_grey.svg").then(function(xml, error) {
     .appendChild(xml.documentElement);   // додаємо до нього наше svg як html
   
   d3.selectAll("figure svg #doglines polyline")
-    .attr('data-breed', function(d, i) {
+    .attr('data-breed', function(d, i) {  
       return breeds[i];
     })
     .attr('style', null);
@@ -81,7 +98,7 @@ d3.xml("breeds_grey.svg").then(function(xml, error) {
     
   $("figure svg #fakelines polyline")
     .mouseenter(function() {
-      const breed = $(this).data('breed');
+      const breed = $(this).data('breed')
       highlightDog(breed);
     })
     

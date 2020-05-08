@@ -101,7 +101,7 @@ ggsave("plot_twitter_both.png", width = 16, height = 10, units = "cm")
 ## Неможливо показати все-все
 ```{r}
 ggplot(df, aes(date, searched, color = breed)) +
-  geom_step() +
+  geom_line(show.legend = FALSE) +
   scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
   theme_minimal()
 ```
@@ -131,19 +131,45 @@ ggplot(df, aes(date, searched)) +
 install.packages("plotly")
 library(plotly)
 
-allbreeds <- ggplot(df, aes(date, searched, group=breed)) +
-  geom_line(color="grey") +
+allbreeds <- ggplot(df, aes(date, searched, color=breed)) +
+  geom_line(alpha = 0.4, size = 0.3, show.legend = FALSE) +
   scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
+  scale_x_date(breaks = str_c(2008:2020, "-01-01") %>% as.Date,
+               label = year) +
   theme_minimal()
-
-allbreeds
-
-ggsave("breeds_grey.svg", plot=allbreeds, device="svg", width = 16, height = 10, units = "cm")
 
 p <- ggplotly(allbreeds, tooltip = c("breed"))
 
 p
 ```
+
+# Хочеш зробити щось добре — зроби це сам[a]:)
+Не завжди, але з інтерактивом правило працює.    
+Часто бібліотеки для інтерактивних графіків не дають бажаного результату. На певному етапі стає легше **не** "чаклувати" на бібліотекою, а зробити все самим за допомогою мови JavaScript (стандартна мова всіх веб-браузерів).
+Код брала тут https://stackoverflow.com/questions/43784425/change-the-overlaying-order-of-lines-in-ggplot і тут https://gist.github.com/rensa/1d988451ae15882c889f49cf20b99a64
+
+1. Перенесемо наше векторне зображення в html.
+Все супер, але ми не знаємо, яка лінія відповідає за яку собачку. Треба десь її записати, в фтрибутах тегу, наприклад. (див у interactive.html)
+
+## 1. Мусимо знати порядок, в якому ggplot малював наші дані. R має фактори — порядкові змінні, в яких крім значення є порядок (так, у нас номінальна=категорійна змінна, але для того, щоб знати яка лінія яку породу представляє ми зробимо трюк з порядковою, на графіку ж не видно цього)
+```{r}
+df$breed <- df$breed %>%
+  factor(levels = df$breed[1:25])
+
+allbreeds <- ggplot(df, aes(date, searched, group = breed)) +
+  geom_line(color = "#525252", alpha = 0.4, size = 0.3) +
+  scale_y_continuous(name = "% search", limits = c(0, max(df$searched))) +
+  scale_x_date(breaks = str_c(2008:2020, "-01-01") %>% as.Date,
+               label = year) +
+  theme_minimal()
+
+ggsave("breeds_grey.svg", plot=allbreeds, device="svg", width = 16, height = 10, units = "cm")
+
+levels(df$breed[1:25])
+# скопіюємо ці рівні у наш веб-скрипт
+
+```
+
 
 
 # Лайфхак, щоб з'єднати гугл-тренди
