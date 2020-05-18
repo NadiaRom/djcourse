@@ -1,0 +1,44 @@
+---
+title: "Map"
+output: html_notebook
+---
+Намалюємо інтерактивну карту.  
+Перше — треба дані, з координатами широти і довготи. Хороша перша думка  OpenStreetMap. https://overpass-turbo.eu/ (використовуйте "візард" для запитів, а запит уточніть у вікі для ОСМ).  
+
+Пакети для роботи з картами:  
+```{r}
+install.packages("leaflet")
+istall.packages("rgdal")
+# install.packages("tidyverse")
+```
+
+
+```{r}
+library(tidyverse)
+library(leaflet)
+library(rgdal)
+```
+
+```{r}
+lviv_schools <- readOGR("schools_points.geojson")
+```
+
+```{r}
+leaflet(lviv_schools) %>%
+  addTiles() %>%
+  addMarkers(popup = ~as.character(name.uk_2), label = ~as.character(name.uk))
+  
+```
+
+
+
+```{r}
+leaflet(nycounties) %>%
+  addTiles() %>%
+  addPolygons(stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+    fillColor = ~pal(log10(pop)),
+    label = ~paste0(county, ": ", formatC(pop, big.mark = ","))) %>%
+  addLegend(pal = pal, values = ~log10(pop), opacity = 1.0,
+    labFormat = labelFormat(transform = function(x) round(10^x)))
+```
+
