@@ -2,16 +2,15 @@
 title: "Map"
 output: html_notebook
 ---
+
 Намалюємо інтерактивну карту.  
 Перше — треба дані, з координатами широти і довготи. Хороша перша думка  OpenStreetMap. https://overpass-turbo.eu/ (використовуйте "візард" для запитів, а запит уточніть у вікі для ОСМ).  
 
 Пакети для роботи з картами:  
 ```{r}
 install.packages("leaflet")
-install.packages("geojsonR")
-# install.packages("tidyverse")
-
-print("Hello world!")
+install.packages("lubridate")
+install.packages("rgdal")   # https://github.com/NadiaRom/djcourse/issues/3
 ```
 
 Як виправити баг у Qgis:
@@ -24,14 +23,29 @@ print("Hello world!")
 ```{r}
 library(tidyverse)
 library(leaflet)
-library(geojsonR)
+library(rgdal)
 ```
 
+
+### Якщо ви встановили `rgdal`:
 ```{r}
-lviv_schools <- FROM_GeoJson("schools_points.geojson")
+lviv_schools <- readOGR("schools_points.geojson")
+
+leaflet(lviv_schools) %>%
+  addTiles() %>%
+  addCircleMarkers(radius = 5, weight = 1,
+                   color = "#FF4500", fillColor = "#FF4500",
+                   fillOpacity = 0.5, 
+                   label = ~name)
+
+
+
 ```
 
+
+### Не чиатючи GeoJSON з точками шкіл як дані:
 ```{r}
+lviv_schools <- readLines("schools_points.geojson") %>% paste(collapse = "\n")
 
 leaflet() %>% 
   setView(lng = 24, lat = 49.8, zoom = 6) %>%
