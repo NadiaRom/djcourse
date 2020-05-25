@@ -10,6 +10,8 @@ output: html_notebook
 install.packages("leaflet")
 install.packages("geojsonR")
 # install.packages("tidyverse")
+
+print("Hello world!")
 ```
 
 Як виправити баг у Qgis:
