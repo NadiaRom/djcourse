@@ -31,11 +31,14 @@ library(rgdal)
 ```{r}
 lviv_schools <- readOGR("schools_points.geojson")
 
+
 leaflet(lviv_schools) %>%
-  addTiles() %>%
-  addCircleMarkers(radius = 5, weight = 1,
+  # можемо вибрати підложку, див. доки
+  addProviderTiles(providers$CartoDB.Positron) %>%  
+  addCircleMarkers(radius = 5, weight = 1,  # просто стилі
                    color = "#FF4500", fillColor = "#FF4500",
                    fillOpacity = 0.5, 
+                   # лейбл — щоб знати що ж це за точка
                    label = ~name)
 
 
