@@ -15,6 +15,10 @@ install.packages("geojsonR")
 Як виправити баг у Qgis:
 Меню Settings => Options => Processing => General => Перемкнути "Invalid features filtering" на "Do not filter"
 
+Де дістати дані OSM? https://overpass-turbo.eu/ . Або https://wiki.openstreetmap.org/wiki/QGIS — завантажити великий файл OSM для певної країни, і самим намалювати потрібне: межі адміністративних одиниць певного рівня, дороги, водойми, будинки...
+Ще варіант де отримати гарну підложку — Mapbox. Мінус — обмеження безкоштовного використання, плюс — не треба коду.
+Де малювати інтерактивні карти? — Leaflet, для R або JavaScript
+
 ```{r}
 library(tidyverse)
 library(leaflet)
@@ -26,21 +30,12 @@ lviv_schools <- FROM_GeoJson("schools_points.geojson")
 ```
 
 ```{r}
-leaflet(lviv_schools) %>%
+
+leaflet() %>% 
+  setView(lng = 24, lat = 49.8, zoom = 6) %>%
   addTiles() %>%
-  addMarkers(popup = ~as.character(name.uk_2), label = ~as.character(name.uk))
+  addGeoJSON(lviv_schools, weight = 1, color = "#444444", fill = FALSE)
   
 ```
 
-
-
-```{r}
-leaflet(nycounties) %>%
-  addTiles() %>%
-  addPolygons(stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
-    fillColor = ~pal(log10(pop)),
-    label = ~paste0(county, ": ", formatC(pop, big.mark = ","))) %>%
-  addLegend(pal = pal, values = ~log10(pop), opacity = 1.0,
-    labFormat = labelFormat(transform = function(x) round(10^x)))
-```
 
