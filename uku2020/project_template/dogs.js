@@ -10,7 +10,7 @@ const breeds = [
   'West Highland White Terrier', 'Yorkshire Terrier', 'Pit bull', 'Boxer',
 ]
 
-d3.xml('../img/breeds_grey.svg').then(function(xml, error) {
+d3.xml('img/breeds_grey.svg').then(function(xml, error) {
   $('figure#dogs')
     .append(xml.documentElement);
     
