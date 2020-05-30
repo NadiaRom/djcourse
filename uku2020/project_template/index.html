@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <meta property="og:site_name" content="Магістерська програма з медіакомунікацій УКУ, Аналіз та візуалізація даних"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Фінальний проєкт"/>
+    <meta property="og:image" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content="https://">
+
+    <!-- Other Meta Tags -->
+    <meta name="title" content="Фінальний проєкт">
+    <meta name="description" content="Інтерактивна візуалізація тем, які просуває російська дезінформація в Україні">
+    <link rel="icon" href="img/favicon-32x32.png">
+
+    <title>Фінальний проєкт — Шаблон</title>
+
+    <!-- Шрифт з Google Fonts, треба повибирати і клікнути на "embed", воно видасть рядок, що нижче. Тепер маємо шрифт "Nunito". -->
+    <!-- Виберіть шрифт, який вам подобається. Краще 1, і Sans Serif, без засічок, з такими легше читати. Благаю, не беріть "Comic Sans":) -->
+    <!-- Пошукайте правила комбінування шрифтів, хоча симпатичний і непретензійний шрифт з виду Sans Serif майже гарантує вам успіх -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"> 
+
+    <!-- Стилі -->
+    <link href="style.css" rel="stylesheet">
+    <link href="dogs.css" rel="stylesheet">
+    <link href="grid.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- На випадок, якщо з браузером користувача щось не так, можна і пропустити -->
+    <noscript>
+      <strong>Будь ласка, дозвольте браузеру використовувати JavaScript</strong>
+    </noscript>
+    <!-- Так, це все писалось руками. Хороший редактор, що сам закриває теги і все підсвічує — незамінний. Текст краще копіювати по абзацам з Ворд або аналогів. -->
+  <main>
+    <header>
+      <h1>Гарна назва мого проекта</h1>
+      <h2>Лід мого проєкта. Кілька речень чому треба це читати, крім того що це екзаменаційна робота. Наприклад, "У цьому проєкті ми виявили, що земля не пласка. Як? — Читайте далі".</h2>
+    </header>
+
+    <article>
+      <section class="text">
+        <h3>Як робиться веб-сторінка?</h3>
+        <p>Це папка з файлами, ключовий з яких — <code>index.html</code>, він має бути названий саме так. І в цьому файлі буде відображатись зміст сторінки. Окремо можна винести джаваскрипт і стилі, хоча можна писати їх у тегах <code>&lt;script&gt;</code> та <code>&lt;style&gt;</code>. Елементів багато, користайтесь <a href="https://www.w3schools.com/TAGS/default.ASP" target="_blank">W3C</a>, щоб зрозуміти який вам треба і як цей тег стилізувати.</p>
+      </section>
+
+      <section class="text">
+        <h3>Другий підзаголовок</h3>
+        <p>
+          Абзаци огорнуті в теги <code>&lt;p&gt;</code>. У них міститься текст. Самі абзаци і логічно окремі блоки сторінки краще тримати у тегах-контейнерах: <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;figure&gt;</code> тощо. Цими тегами можна ділити сторінку на колонки, різноманітно розставляти блоки, наприклад, робити "сітку". Для нього будемо використовувати CSS-grid. Дуже допомагає розмітити сторінку на аркуші паперу, щоб зрозуміти, які блоки у ній будуть. До речі, вищеперелічені теги поводяться себе однаково і відрізняються лиш назвою: назва вказує на те, що всередині блока, наприклад, у <code>&lt;figure&gt;</code> ми очікуємо побачити графік, а в <code>&lt;article&gt;</code> — якусь змістовну частину з текстом.
+        </p>
+        <p><strong>Вставимо картинку, наприклад, графік який ми робили в ggplot2:</strong></p>
+        <figure>
+          <img src="img/plot_twitter_both.png">
+          <figcaption>Картинка з одного з занять. Краще всі картинки зберігати в окремий папках<figcaption>
+        </figure>
+      </section>
+
+      <section id="course">
+        <h3>А тут покажемо CSS-grid на прикладі структури матеріалів курсу</h3>
+        <p>Не обов'язково робити це саме такими тегами. Як використала <code>&lt;ul&gt;</code> бо це тег списку, а у мене там по чуті список. Можна робити тегами <code>&lt;div&gt;</code> чи якими вам буде зручніше.</p>
+        <p>Див. "grid.css"</p>
+        <ul id="grid">
+          <li><a href="https://github.com/NadiaRom/djcourse/tree/master/lections">Лекції</a></li>
+          <li><a href="https://github.com/NadiaRom/djcourse/tree/master/uku2020/hw1" target="_blank">Основи R</a></li>
+          <li><a href="https://github.com/NadiaRom/djcourse/tree/master/uku2020/day2-scraper" target="_blank" target="_blank">Скрейпінг</a></li>
+          <li><a href="https://github.com/NadiaRom/djcourse/tree/master/uku2020/day3-tables" target="_blank">Аналіз таблиць</a></li>
+          <li><a href="https://github.com/NadiaRom/djcourse/tree/master/uku2020/day4-plots" target="_blank">Графіки</a></li>
+          <li><a href="https://github.com/NadiaRom/djcourse/tree/master/uku2020/day5-map-interactive" target="_blank">Інтерактив, карти</a></li>
+        </ul>
+      </section>
+
+      <section id="interactive">
+        <h3>Лінійний графік з можливістю вибрати, яку лінію підсвічувати, з останнього заняття</h3>
+        <h4>Пошукові запити породи <select></select></h2>
+        <figure id="dogs"></figure>
+      </section>
+
+    </article>
+
+    <footer>
+      <section>
+        <p>Посилання, що використала (APA style не вимагається):</p>
+        <ul>
+          <li>Написано у <a href="https://code.visualstudio.com/" target="_blank">VSCode</a></li>
+          <li>Дякую <a href="https://jquery.com/" target="_blank">Jquery</a> за те, що не довелось писати сирий JS</li>
+        </ul>
+        <p>Щось формальне чи маловажливе у футері сторінки…</p>
+      </section>
+      <section id="copyright">
+        <p>© 2020, Надія Романенко для курсу «Аналіз та візуалізація даних»</p>
+        <p>Тут можна написати, на яких умовах інші можуть посилатись, копіювати, використовувати вашу роботу. Це шаблон для студенток і студентів курсу, використовуйте його як хочете, можна не посилатись.</p>
+      </section>
+    </footer>
+  </main>
+
+  <!-- Джаваскрипт: -->
+  <!-- 1) бібліотеки -->
+  <script src="https://d3js.org/d3.v5.min.js"></script> 
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- Власні скрипти -->
+  <script src="main.js"></script>
+  <script src="dogs.js"></script>
+<!-- Ми ставимо джаваскрипт в кінці, щоб на момент їх включення були промальовані всі потрібні елементи -->
+<!-- Бібліотеки можна ставити і на початку коду, так роблять частіше. Але тут я зробила всі скрипти в одному місці для зручності -->
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+/* Копія з тега <style> з лекційного. Змінила селектори, щоб не вибирало зайве */
+
+figure#dogs svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+} 
+
+section#interactive #g_breeds polyline {
+  stroke: grey;
+  stroke-width: 1px;
+  opacity: 0.4;
+  transition: stroke 0.3s, opacity 0.3s; 
+  /* щоб поступово змінювався колір */
+}
+
+section#interactive #g_breeds polyline.active {
+  stroke: #52E3B2;
+  strike-width: 2px;
+  opacity: 1;
+}
+
+section#interactive h4 {
+  font-weight: 400;
+  font-size: 1em;
+  margin: 0 0 14px 0;
+  text-align: center;
+}
+
+section#interactive h4 select {
+  border-radius: 0;
+  font-family: inherit;
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  font-weight: 600;
+  color: #52E3B2;
+}

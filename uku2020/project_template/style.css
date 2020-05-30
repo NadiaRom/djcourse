@@ -1,0 +1,124 @@
+/* Взагалі простий css писати трохи довго, тож якщо є складні стилі і хочеться більшого — SCSS чи аналоги */
+/* https://sass-lang.com/ — там є змінні і вкладення, виходить менше писати. Потім треба компілювати в звичайний css якоюсь з програм для цього, тому на зараз це трохи складно */
+
+
+/* у body ми даємо загальні стилі для всього */
+body {
+  font-family: 'Nunito', sans-serif;
+  /* якщо 'Nunito' не спрацює, буде sans-serif, це на випадок помилок */
+  background-color: #212121;
+  /* колір шрифта */
+  /* Вибір кольорів, один з багатьох https://gka.github.io/palettes/ */
+  color: #efefef;
+  /* На темномі тлі треба робити більше інтервал між літерами (хак від дизайнерки Текстів) */
+  letter-spacing: 0.02em;
+  /* em — розмір тексту в браузері, часто 16px, але люди можуть собі налаштовувати дрібніше чи крупніше. Так ми враховуємо налаштування користувачів, а не грубо пишемо у пікселях */
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* Текст на всю ширину сторінки, будьмо відвертими, виглядає жахливо. Змінімо це */
+/* Знайомтесь, media-query — різні правила для різної ширини екрану */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries */
+/* https://color.adobe.com/create/color-wheel */
+article section, footer section, header {
+  margin: 1em 1em 3em 1em;
+  /* порядок сторін: top, right, bottom, left. Щоб запам'ятати, є слово "trouble" */
+}
+
+@media screen and (min-width: 800px) {
+  article section, footer section, header {
+    margin: 1em 10% 3em 10%; 
+  }
+}
+
+/* Позменшуйте-збільшуйте браузер, щоб глянути на зміни */
+@media screen and (min-width: 1100px) {
+  article section, footer section, header {
+    margin: 1em 20% 3em 20%; 
+  }
+}
+
+/* Розмір картинок */
+figure {
+  margin: 2em 0; /* 1 — top, bottom, 2—right, left */
+}
+
+section.text img {
+  max-width: 100%;
+}
+
+figcaption {
+  font-style: italic;
+  color: #989898;
+  text-align: center;
+}
+
+/* Заголовок і лід */
+
+header h1 {
+  font-size: 3em;
+  color: #52E3B2;
+  font-weight: 300;
+  margin: 2rem 0;
+  line-height: 1;
+}
+
+header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 3em;
+  font-weight: 600;
+  line-height: 1.5;
+  /* "жирнота" шрифту, 400 — нормальний, 300-100 легкий, 600-800 — жирний */
+}
+
+/* Далі додамо стилів */
+section {
+  margin-bottom: 3em;
+}
+
+section.text p {
+  font-size: 1.1em;
+}
+
+section h3 {
+  font-weight: 600;
+  text-transform: uppercase;
+  border-left: 2px solid #52E3B2;
+  padding-left: 0.5em;
+}
+
+code {
+  color: #52E3B2;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline 2px dotted #52E3B2;
+  transition: background-color 0.3s;
+}
+
+/* cтиль при неведенні миші на лінк */
+a:hover {
+  background-color: #52E3B270;
+}
+
+article {
+  margin-bottom: 6em;
+}
+
+/* Футер білий */
+footer {
+  background-color: #efefef;
+  color: #212121;
+  letter-spacing: 0.01em;
+  padding-top: 2em;
+}
+
+section#copyright {
+  color: #989898;
+  border-top: 1px solid #989898;
+  padding: 1.5em 0;
+  margin-bottom: 0;
+}
