@@ -1,23 +1,33 @@
 /* Як робити колонки та "плитку" */
-/* Має сенс лише на великих екранах */
+
+ul#grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* 3 колонки однакової ширини */
+  grid-gap: 1em;  /* відстань між одиницями сітки; */
+  list-style: none;
+  margin: 1em 0 2em 0;
+  padding: 0;
+}
+
+ul#grid li {
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #212121;
+}
+
+/* Більше колонок на великих екранах */
 @media screen and (min-width: 800px) {
   ul#grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     /* 3 колонки однакової ширини */
-    grid-gap: 1em;  /* відстань між одиницями сітки; */
-    list-style: none;
-    margin: 1em 0 2em 0;
-    padding: 0;
   }
 
   /* Колір задається у main.js */
 
   ul#grid li {
-    text-align: center;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #212121;
     opacity: 0.7;
     transform: opacity 0.3;
   }
@@ -25,15 +35,16 @@
   ul#grid li:hover {
     opacity: 1;
   }
+}
 
-  ul#grid li a {
-    display: inline-block;
-    padding: 1em 0;
-    width: 100%;
-    text-decoration: none;
-  }
+/* Там лінки, і ми хочемо прибрати загальний стиль лінків */
+ul#grid li a {
+  display: inline-block;
+  padding: 1em 0;
+  width: 100%;
+  text-decoration: none;
+}
 
-  ul#grid li a:hover {
-    background-color: none;
-  }
+ul#grid li a:hover {
+  background-color: none;
 }

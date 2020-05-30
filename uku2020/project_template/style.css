@@ -4,7 +4,7 @@
 
 /* у body ми даємо загальні стилі для всього */
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   /* якщо 'Nunito' не спрацює, буде sans-serif, це на випадок помилок */
   background-color: #212121;
   /* колір шрифта */
@@ -66,10 +66,10 @@ header h1 {
 }
 
 header h2 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin-bottom: 3em;
-  font-weight: 600;
-  line-height: 1.5;
+  font-weight: 300;
+  line-height: 1.75;
   /* "жирнота" шрифту, 400 — нормальний, 300-100 легкий, 600-800 — жирний */
 }
 
@@ -83,7 +83,7 @@ section.text p {
 }
 
 section h3 {
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   border-left: 2px solid #52E3B2;
   padding-left: 0.5em;
